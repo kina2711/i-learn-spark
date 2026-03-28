@@ -102,7 +102,7 @@ Một ví dụ pipeline điển hình là: đọc dữ liệu từ storage, quer
 
 ### **5.3. Mở interactive shell**
 
-1. PySpark
+1. **PySpark**
 
 	- Nếu học bằng Python, cách phổ biến nhất là mở PySpark từ thư mục Spark bằng lệnh sau.
 		`bash./bin/pyspark`
@@ -110,7 +110,7 @@ Một ví dụ pipeline điển hình là: đọc dữ liệu từ storage, quer
 	- Sau khi shell khởi động, bạn gõ `spark` để kiểm tra và sẽ thấy đối tượng SparkSession đã có sẵn.
 	- Đây là cách vào Spark nhanh nhất cho người mới vì bạn có thể chạy từng dòng lệnh Python tương tác ngay lập tức.
 
-1. Scala shell
+1. **Scala shell**
 
 	- Nếu học bằng Scala, bạn mở shell bằng lệnh sau.
 		`bash./bin/spark-shell`
@@ -118,26 +118,26 @@ Một ví dụ pipeline điển hình là: đọc dữ liệu từ storage, quer
 	- Tương tự PySpark, khi shell chạy xong bạn có thể gõ `spark` để thấy SparkSession đã được tạo sẵn.
 	- Vì Spark được viết chủ yếu bằng Scala, đây là môi trường gần với “ngôn ngữ gốc” của Spark nhất.
 
-2. SQL shell
+2. **SQL shell**
 
 	- Nếu muốn tập trung vào Spark SQL, bạn có thể vào SQL console bằng lệnh sau.
 		`bash./bin/spark-sql`
 
 	- Cách này đặc biệt phù hợp khi bạn muốn thử query nhanh theo kiểu analyst thay vì viết code Python hay Scala.
 
-3. Nên bắt đầu bằng shell nào
+3. **Nên bắt đầu bằng shell nào**
 
 	- Theo nội dung sách, các điểm vào được ưu tiên nhất là Python, Scala và SQL vì phần lớn ví dụ trong sách xoay quanh ba cách này.
 	- Nếu bạn mới học và quen Python, nên bắt đầu bằng `pyspark`; nếu muốn hiểu Spark sát hơn với thiết kế ban đầu, có thể học thêm `spark-shell`.
 
-### **5.4. Chạy trên cloud và dữ liệu ví dụ**
+### **5.4. Chạy trên cloud**
 
-1. Databricks Community Edition
+1. **Databricks Community Edition**
 
 	- Nếu không muốn tự cài local hoặc muốn có trải nghiệm notebook thuận tiện hơn, bạn có thể dùng Databricks Community Edition qua trình duyệt web.
 	- Đây là môi trường cloud miễn phí do Databricks cung cấp để học Spark, cho phép chạy Scala, Python, SQL hoặc R trực tiếp trên giao diện web.
 
-2. Lợi ích của cloud notebook
+2. **Lợi ích của cloud notebook**
 
 	- Cách học này giúp bạn bỏ qua phần cài đặt phức tạp, tập trung ngay vào việc đọc code, chỉnh sửa code và quan sát kết quả.
 	- Nó đặc biệt hữu ích nếu mục tiêu của bạn là học khái niệm và thực hành nhanh thay vì tự dựng môi trường từ đầu.
