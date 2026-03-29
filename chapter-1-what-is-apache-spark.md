@@ -2,148 +2,149 @@
 
 ## **1. Tóm tắt**
 
-Apache Spark là một **unified computing engine** (công cụ tính toán thống nhất) và một tập thư viện dùng để **xử lý dữ liệu song song** trên các cụm máy tính, hỗ trợ nhiều ngôn ngữ như Python, Java, Scala và R, đồng thời có thể chạy từ laptop đến cluster rất lớn. Chương 1 đi qua ba trục chính: Spark là gì, vì sao thế giới dữ liệu cần Spark, và người mới nên bắt đầu chạy Spark theo những cách nào như local, interactive shell hoặc môi trường cloud.
+```mermaid
+mindmap
+  root((Chapter 1<br/>What Is Apache Spark?))
+    Spark là engine tính toán phân tán
+    Giá trị cốt lõi là tính thống nhất
+    Vì sao Spark cần thiết
+      Big data
+      Parallel computing
+    Spark tập trung vào computation
+      Không phải storage lâu dài
+      Làm việc với nhiều storage systems
+    Cách học đúng
+      Hiểu vì sao có Spark
+      Chưa cần ưu tiên syntax
+```
 
-## **Key takeaway**
+- Điều quan trọng nhất của Chapter 1 **không phải syntax**, mà là hiểu đúng “vì sao Spark tồn tại” và “nó giải quyết lớp bài toán nào”.
+- Spark khác mô hình Hadoop đời đầu ở chỗ nó **tập trung vào computation** trên nhiều storage system khác nhau thay vì gắn chặt compute với một storage duy nhất.
+- Spark ra đời vì dữ liệu tăng rất nhanh trong khi phần cứng không còn tăng tốc chủ yếu bằng CPU đơn ngày càng nhanh hơn, nên cần mô hình xử lý song song.
+- Điểm mạnh cốt lõi của Spark là **tính thống nhất**: cùng một engine cho SQL, machine learning, streaming và graph analytics.
+- Spark là engine tính toán phân tán, **không phải hệ lưu trữ dữ liệu lâu dài**.
 
-- Spark là engine tính toán phân tán, không phải hệ lưu trữ dữ liệu lâu dài.
-- Giá trị lớn nhất của Spark là tính thống nhất: một nền tảng cho SQL, machine learning, streaming và các bài toán dữ liệu khác.
-- Spark ra đời vì dữ liệu tăng nhanh nhưng phần cứng không còn tăng tốc theo kiểu CPU đơn ngày càng nhanh hơn, nên cần mô hình xử lý song song.
-- Spark khác các hệ cũ ở chỗ nó tập trung vào computation trên nhiều storage khác nhau và mở rộng mạnh nhờ hệ thư viện.
-- Với người học, Chapter 1 quan trọng nhất ở chỗ hiểu “vì sao có Spark” trước khi học syntax hay tối ưu.
+## **2. Key takeaway**
 
-## **2. Explain và Intuition**
+Chapter 1 xoay quanh ba câu hỏi:
 
-Spark được mô tả là một **unified computing engine** và tập thư viện để **xử lý dữ liệu song song** trên cluster, nghĩa là nó vừa **cung cấp engine tính toán**, vừa **cung cấp nhiều thư viện để giải quyết các bài toán dữ liệu** phổ biến. Việc “**unified**” rất quan trọng vì trong thực tế một ứng dụng dữ liệu thường không chỉ làm một việc duy nhất, mà phải kết hợp đọc dữ liệu, query, aggregate, machine learning, thậm chí streaming trong cùng một pipeline.
+1. Spark là gì?
 
-Để dễ hiểu, bạn hãy xem Spark như bộ não điều phối tính toán cho dữ liệu lớn: dữ liệu có thể nằm ở nhiều nơi, còn Spark mang logic xử lý đến gần dữ liệu và chạy song song trên nhiều máy. Điểm khác biệt quan trọng là Spark không cố trở thành nơi lưu trữ dữ liệu vĩnh viễn, mà tập trung làm tốt lớp compute phía trên các storage system đã có sẵn.
+2. Vì sao bối cảnh dữ liệu hiện đại làm Spark trở nên cần thiết?
 
-## **3. Breakdown**
+3. Người mới nên bắt đầu học và chạy Spark như thế nào?
 
-### **3.1 Spark là unified computing engine**
+Apache Spark được định nghĩa là một **unified computing engine**, đi kèm một tập thư viện để **xử lý dữ liệu song song** trên cluster, **hỗ trợ nhiều ngôn ngữ** như Python, Java, Scala và R, và có thể chạy từ laptop đến các cụm máy rất lớn.
 
-- Spark được thiết kế để **hỗ trợ nhiều loại phân tích dữ liệu trên cùng một computing engine và cùng một tập API nhất quán**.
-- Sự thống nhất này giúp các tác vụ như SQL, machine learning và streaming có thể được ghép lại trong cùng một ứng dụng thay vì phải nối nhiều hệ thống rời rạc.
-- Spark hỗ trợ nhiều ngôn ngữ phổ biến và có thể chạy từ máy cá nhân đến cluster hàng nghìn server.
+# **A. Phần 1: Spark – Một Unified Computing Engine**
 
-### **3.2 Triết lý thiết kế: unified, computing engine, libraries**
+## 1. Định nghĩa và bản chất cốt lõi của Spark
 
-- **Unified**: Spark muốn trở thành một platform thống nhất cho việc xây dựng big data applications, với API có thể ghép nối và tối ưu xuyên suốt toàn pipeline.
-- **Computing engine**: Spark chỉ tập trung vào việc đọc dữ liệu từ storage systems và tính toán trên dữ liệu đó, thay vì tự trở thành một hệ lưu trữ lâu dài.
-- **Libraries**: Spark mở rộng sức mạnh thông qua các thư viện chuẩn như Spark SQL, MLlib, Spark Streaming, Structured Streaming và GraphX, cùng rất nhiều thư viện cộng đồng.
+- Spark là một “unified computing engine and a set of libraries for parallel data processing on computer clusters,” và đây là định nghĩa cần giữ rất chắc vì nó chứa gần như toàn bộ bản chất của Spark.
+    - Từ “engine” cho biết Spark tập trung vào việc thực thi tính toán trên dữ liệu.
+    - Từ “unified” cho biết Spark không chỉ tối ưu cho một tác vụ đơn lẻ, mà cố gắng gom nhiều kiểu xử lý dữ liệu vào cùng một nền tảng và cùng một triết lý API.
+    - Từ “libraries” cho biết Spark không phải một lõi trần trụi; nó đi kèm những thư viện cấp cao để giải quyết các bài toán phổ biến như SQL, machine learning, stream processing và graph analytics.
 
-### **3.3 Bối cảnh big data và nhu cầu xử lý song song**
+## **2. Tại sao “unified” lại quan trọng trong pipeline thực tế?**
 
-- Trước đây, phần mềm thường **tự nhanh hơn khi CPU nhanh hơn**, nên nhiều ứng dụng chỉ được **thiết kế cho một processor**.
-- Khoảng từ năm 2005, phần cứng **ngừng tăng tốc mạnh ở một CPU đơn** và chuyển sang **nhiều core chạy song song**, khiến phần mềm muốn nhanh hơn thì phải được viết theo hướng parallelism.
-- Trong khi đó, **chi phí lưu trữ và thu thập dữ liệu vẫn tiếp tục giảm**, làm cho việc **có rất nhiều dữ liệu trở thành bình thường** nhưng việc **xử lý nó lại cần các mô hình tính toán phân tán** mới như Spark.
+- Bản chất của dữ liệu trong thế giới thực là **hiếm khi đứng yên trong một kiểu xử lý duy nhất**.
+- Một luồng công việc thực tế thường bắt đầu bằng đọc dữ liệu, sau đó làm sạch, truy vấn tổng hợp, tạo feature, huấn luyện model, rồi có thể triển khai thành xử lý gần thời gian thực.
+- Nếu mỗi bước nằm ở một hệ khác nhau, bạn phải trả giá bằng việc di chuyển dữ liệu, học nhiều API, vận hành nhiều hệ thống và chấp nhận việc tối ưu chỉ dừng ở từng chặng nhỏ.
+- Spark cố giải quyết đúng vấn đề đó: **dùng cùng một engine** để các bước khác nhau trong pipeline có thể “nói chuyện” với nhau một cách tự nhiên hơn.
 
-### **3.4 Lịch sử hình thành Spark**
+## **3. Phân tích chi tiết**
 
-- Spark bắt đầu tại UC Berkeley vào năm 2009 như một research project và được công bố trong bài báo “Spark: Cluster Computing with Working Sets” vào năm sau đó.
-- Một động lực lớn cho sự ra đời của Spark là **hạn chế của Hadoop MapReduce**, đặc biệt trong các bài toán nhiều bước hoặc có tính lặp như machine learning, nơi **mỗi vòng lặp trong MapReduce thường phải là một job riêng.**
-- Sau giai đoạn đầu, Spark mở rộng từ batch sang interactive data science, SQL, machine learning, streaming và graph processing, rồi được đưa vào Apache Software Foundation năm 2013, ra bản 1.0 năm 2014 và 2.0 năm 2016.
+1. Unified platform cho nhiều tác vụ xử lý dữ liệu
+    - Spark được thiết kế để hỗ trợ nhiều tác vụ phân tích dữ liệu, từ data loading và SQL cho đến machine learning và streaming computation, trên cùng một computing engine và với một tập API nhất quán.
+    - Các tác vụ phân tích dữ liệu ngoài đời thật thường là tổ hợp của nhiều kiểu xử lý, chứ không chỉ một phép biến đổi riêng lẻ.
+    - Điểm mạnh của sự thống nhất không chỉ là **tiện dùng**, mà còn là **dễ tối ưu**, vì engine có thể nhìn qua nhiều bước liên tiếp để đưa ra kế hoạch thực thi tốt hơn.
+2. Vai trò “computing engine” (không phải storage)
+    - Spark tự giới hạn phạm vi của mình ở vai trò **engine tính toán: đọc dữ liệu từ hệ lưu trữ, xử lý dữ liệu đó, và trả kết quả ra ngoài**.
+    - Spark **không định vị mình như nơi lưu dữ liệu lâu dài**.
+    - Vì vậy Spark **có thể làm việc với nhiều hệ lưu trữ khác nhau** như cloud storage, distributed file systems, key-value stores và message buses.
+    - Đây là một quyết định kiến trúc rất quan trọng vì dữ liệu trong doanh nghiệp thường nằm rải rác ở nhiều nơi, và chi phí di chuyển dữ liệu thường rất đắt.
+3. Bộ thư viện cốt lõi (SQL, MLlib, Streaming, GraphX)
+    - **Spark SQL** phục vụ cho dữ liệu có cấu trúc và truy vấn theo mô hình bảng.
+    - **MLlib** phục vụ machine learning.
+    - **Spark Streaming** và **Structured Streaming** phục vụ xử lý luồng dữ liệu.
+    - **GraphX** phục vụ graph analytics.
+    - Ngoài thư viện chuẩn còn có rất nhiều thư viện bên ngoài do cộng đồng phát triển.
+4. “Unified” sâu hơn mức có nhiều module
+    - Spark là unified, ý không chỉ là “có nhiều module.”
+    - Ý sâu hơn là các module đó được xây để interoperable, tức là có thể kết hợp trong cùng ứng dụng thay vì tồn tại như các đảo tách biệt.
+    - Đây là khác biệt lớn giữa một hệ sinh thái chắp vá và một platform có chủ đích thiết kế thống nhất từ đầu.
 
-### **3.5 Hiện tại và tương lai của Spark**
+## **4. Bảng so sánh khái niệm**
 
-- Spark là một trong những hệ thống mã nguồn mở phát triển năng động nhất cho large-scale data processing và tiếp tục mở rộng use case theo thời gian.
-- Structured Streaming được nêu như một bước tiến lớn, và Spark được nhắc đến như công cụ đang được dùng ở các công ty công nghệ lớn cũng như các tổ chức khoa học như NASA, CERN và Broad Institute.
-- Spark chưa phải một công nghệ “đã xong”, mà là một nền tảng còn tiếp tục phát triển mạnh trong tương lai gần.
+| **Concept** | **Nghĩ đơn giản** | **Hiểu đúng hơn** |
+| --- | --- | --- |
+| Unified engine | Một tool làm nhiều việc | Một nền tảng thống nhất để nhiều bước trong pipeline dữ liệu cùng chạy và cùng được tối ưu. |
+| Engine | Phần mềm xử lý dữ liệu | Lớp thực thi tính toán trên cluster, không phải nơi lưu trữ dữ liệu lâu dài. |
+| Libraries | Add-on phụ thêm | Những khối chức năng chuẩn giúp giải các workload phổ biến trên cùng engine. |
 
-### **4. Example**
+## **5. Ví dụ minh họa**
 
-Hãy tưởng tượng một công ty thương mại điện tử có dữ liệu đơn hàng trong S3, log hành vi người dùng, và nhu cầu vừa làm báo cáo doanh thu vừa xây model dự đoán churn. Trước Spark, họ có thể phải ghép nhiều hệ thống cho batch processing, SQL analytics và machine learning, còn với Spark họ có thể đặt nhiều bước đó trên cùng một engine và cùng một tư duy lập trình.
+- Hãy hình dung một công ty thương mại điện tử có dữ liệu clickstream, đơn hàng và hành vi người dùng.
+- Với Spark, công ty đó có thể dùng SQL để truy vấn và tổng hợp dữ liệu có cấu trúc, dùng machine learning để dự đoán khả năng mua hàng, dùng streaming để xử lý tín hiệu mới đi vào, và dùng graph analytics nếu muốn phân tích quan hệ giữa người dùng và sản phẩm.
+- Giá trị không nằm ở việc “Spark biết làm nhiều thứ,” mà ở chỗ các bước đó có thể nằm trong cùng một stack xử lý.
 
-Một ví dụ pipeline điển hình là: đọc dữ liệu từ storage, query và làm sạch bằng SQL hoặc DataFrame, chạy aggregate, rồi dùng tiếp thư viện ML hoặc streaming nếu cần. Đây chính là ý “unified” mà chương 1 muốn truyền đạt: nhiều workload, một nền tảng.
+# **B. Phần 2: Tại sao Spark lại quan trọng trong bối cảnh dữ liệu hiện đại?**
 
-## **5. Cách chạy Spark**
+## **1. Bối cảnh: Sự thay đổi của phần cứng và sự bùng nổ dữ liệu**
 
-Để học Spark hiệu quả, bạn nên chạy code theo kiểu interactive để vừa đọc vừa thử nghiệm ngay, thay vì chỉ đọc lý thuyết. Spark hỗ trợ nhiều ngôn ngữ như Python, Java, Scala, R và SQL, nhưng bản thân Spark chạy trên JVM, vì vậy yêu cầu nền tảng tối thiểu để chạy Spark là có Java trên máy; nếu dùng Python thì cần thêm Python, còn nếu dùng R thì cần cài R.
+- Spark quan trọng vì nó xuất hiện đúng lúc thế giới dữ liệu bước vào một trạng thái mới: dữ liệu tăng rất nhanh, việc lưu và thu thập dữ liệu rẻ hơn nhiều, nhưng **khả năng tăng tốc tự nhiên của phần cứng theo mô hình cũ đã chậm lại**.
+- Trong phần lớn lịch sử máy tính, ứng dụng tự nhiên hưởng lợi từ việc CPU mỗi năm chạy nhanh hơn.
+- Tuy nhiên khoảng từ năm 2005, vì giới hạn tản nhiệt, nhà sản xuất phần cứng **chuyển từ tăng xung nhịp sang tăng số lõi xử lý song song**.
+- Điều này tạo ra một thay đổi căn bản: phần mềm muốn chạy nhanh hơn thì phải biết khai thác **parallelism**.
+- Spark là một mô hình lập trình và engine giúp hiện thực hóa điều đó ở quy mô dữ liệu lớn.
 
-### **5.1. Hai cách bắt đầu**
+## **2. Phân tích các vấn đề cốt lõi**
 
-1. **Chạy Spark trên máy cá nhân**
+1. Bản chất của bài toán Big Data
+    - Vấn đề của big data không chỉ là dung lượng lớn.
+    - Vấn đề thật là khối lượng, tốc độ và độ phức tạp của dữ liệu vượt quá khả năng xử lý hiệu quả của một máy đơn trong thời gian chấp nhận được.
+    - Khi đó ta cần cluster để gom tài nguyên của nhiều máy lại thành một môi trường tính toán thống nhất.
+2. Tại sao parallel computing trở thành bắt buộc
+    - Khi CPU không còn tăng tốc đơn nhân như trước, cách duy nhất để tăng throughput là tận dụng nhiều core và nhiều máy.
+    - Nhưng song song hóa không chỉ là **chia file ra nhiều mảnh**; nó còn liên quan đến **điều phối công việc, quản lý lỗi, phân phối dữ liệu và tối ưu trao đổi dữ liệu giữa các nút**.
+    - Spark giúp người dùng không phải trực tiếp xử lý toàn bộ độ phức tạp thấp tầng đó.
+3. Khác biệt với Hadoop-style processing
+    - **Hadoop đời đầu gắn khá chặt storage và computation thông qua HDFS và MapReduce**.
+    - Lựa chọn đó có giá trị lịch sử lớn, nhưng nó khiến việc dùng compute mà không đi kèm storage tương ứng trở nên kém linh hoạt hơn.
+    - **Spark thì tập trung vào computation, còn dữ liệu có thể nằm trên nhiều storage system khác nhau**.
+    - Điều này phù hợp hơn với thực tế hiện đại, nơi doanh nghiệp có thể lưu dữ liệu trên cloud object storage, file system phân tán, NoSQL store hoặc message bus.
+4. Vì sao Spark thuận lợi hơn cho ứng dụng nhiều bước
+    - MapReduce khiến các ứng dụng nhiều bước và iterative workloads trở nên cồng kềnh.
+    - Ví dụ, một thuật toán machine learning có thể phải quét dữ liệu 10 hoặc 20 lần, và trong MapReduce, mỗi pass có thể trở thành một job riêng phải được launch riêng và đọc dữ liệu lại từ đầu.
+    - Spark được thiết kế để biểu diễn các ứng dụng nhiều bước ngắn gọn hơn và hỗ trợ chia sẻ dữ liệu hiệu quả hơn giữa các bước.
 
-	- Đây là cách phù hợp nhất khi mới học vì bạn kiểm soát được môi trường, dễ mở terminal và chạy từng lệnh một.
-	- Bạn không cần có Hadoop cluster để bắt đầu, vì Spark có thể chạy local mode trên chính laptop của bạn.
+## **3. Ví dụ minh họa**
 
-2. **Chạy Spark trên cloud**
+- Giả sử bạn có một bài toán recommendation cần lặp nhiều vòng để tối ưu tham số mô hình.
+- Nếu mỗi vòng lặp là một job rời rạc, chi phí orchestration và đọc dữ liệu sẽ phình to rất nhanh.
+- Một engine như Spark phù hợp hơn vì nó được xây để diễn tả và thực thi loại pipeline lặp nhiều bước này hiệu quả hơn.
 
-	- Nếu muốn môi trường notebook sẵn sàng để học nhanh, bạn có thể dùng Databricks Community Edition, là môi trường miễn phí trên web để chạy Spark trực tiếp trong trình duyệt.
-	- Cách này tiện ở chỗ không phải tự cài đặt nhiều, đồng thời sách cho biết môi trường này có thể dùng để chạy code và dữ liệu ví dụ của sách.
+# **C. Phần 3: Bắt đầu học và chạy Spark như thế nào?**
 
-### **5.2. Chạy local chi tiết**
+## **1. Lịch sử ngắn gọn của Spark**
 
-1. **Chuẩn bị môi trường**
+- Spark bắt đầu ở UC Berkeley năm 2009 như một research project.
+- Bản paper đầu tiên xuất hiện năm sau đó, trong bối cảnh Hadoop MapReduce đang là mô hình thống trị cho cluster computing.
+- Sau các phiên bản đầu cho batch, Spark nhanh chóng mở rộng sang interactive data science và ad hoc queries, rồi có thêm Shark, MLlib, Spark Streaming và GraphX.
+- Năm 2013, Spark được đưa vào Apache Software Foundation, sau đó phát hành Spark 1.0 vào 2014 và Spark 2.0 vào 2016.
+- Các API structured đời mới là một trọng tâm lớn của hệ Spark hiện đại.
 
-	- Trước hết, hãy kiểm tra máy đã có Java hay chưa, vì Spark chạy trên JVM và đây là điều kiện bắt buộc khi chạy Spark local hoặc trên cluster.
-	- Nếu bạn định học bằng PySpark thì cần thêm Python; nếu định học bằng R thì cần cài R tương ứng.
+## **2. Các cách bắt đầu thực tế**
 
-2. **Tải Spark**
-
-	- Vào trang tải chính thức của Apache Spark và chọn bản dựng “Pre-built for Hadoop 2.7 and later”, rồi tải file nén về máy.
-	- Sách được viết chủ yếu với Spark 2.2, nên mốc an toàn được gợi ý là dùng Spark 2.2 hoặc mới hơn để bắt đầu.
-
-3. **Giải nén và vào thư mục Spark**
-
-	- Sau khi tải xong, bạn giải nén file tarball rồi chuyển vào thư mục vừa giải nén.
-	- Trên hệ Unix, ví dụ điển hình là:
-		`bashcd ~/Downloads tar -xf spark-2.2.0-bin-hadoop2.7.tgz cd spark-2.2.0-bin-hadoop2.7.tgz`
-
-4. **Hiểu đúng về thư mục Spark**
-
-	- Khi mở thư mục Spark, bạn sẽ thấy rất nhiều file và thư mục con, nhưng lúc mới học bạn không cần quan tâm hết.
-	- Phần quan trọng nhất ban đầu là thư mục `bin`, vì đây là nơi chứa các lệnh để mở các interactive console như PySpark, Scala shell và SQL shell.
-
-5. **Nếu muốn nối với Hadoop cluster**
-
-	- Spark vẫn chạy local mà không cần Hadoop, nhưng nếu bạn muốn laptop kết nối tới một Hadoop cluster thì phải tải đúng package phù hợp với phiên bản Hadoop của cluster đó.
-	- Với người mới, sách khuyên nên học local trước rồi mới quan tâm đến chuyện ghép với Hadoop cluster.
-
-### **5.3. Mở interactive shell**
-
-1. **PySpark**
-
-	- Nếu học bằng Python, cách phổ biến nhất là mở PySpark từ thư mục Spark bằng lệnh sau.
-		`bash./bin/pyspark`
-
-	- Sau khi shell khởi động, bạn gõ `spark` để kiểm tra và sẽ thấy đối tượng SparkSession đã có sẵn.
-	- Đây là cách vào Spark nhanh nhất cho người mới vì bạn có thể chạy từng dòng lệnh Python tương tác ngay lập tức.
-
-1. **Scala shell**
-
-	- Nếu học bằng Scala, bạn mở shell bằng lệnh sau.
-		`bash./bin/spark-shell`
-
-	- Tương tự PySpark, khi shell chạy xong bạn có thể gõ `spark` để thấy SparkSession đã được tạo sẵn.
-	- Vì Spark được viết chủ yếu bằng Scala, đây là môi trường gần với “ngôn ngữ gốc” của Spark nhất.
-
-2. **SQL shell**
-
-	- Nếu muốn tập trung vào Spark SQL, bạn có thể vào SQL console bằng lệnh sau.
-		`bash./bin/spark-sql`
-
-	- Cách này đặc biệt phù hợp khi bạn muốn thử query nhanh theo kiểu analyst thay vì viết code Python hay Scala.
-
-3. **Nên bắt đầu bằng shell nào**
-
-	- Theo nội dung sách, các điểm vào được ưu tiên nhất là Python, Scala và SQL vì phần lớn ví dụ trong sách xoay quanh ba cách này.
-	- Nếu bạn mới học và quen Python, nên bắt đầu bằng `pyspark`; nếu muốn hiểu Spark sát hơn với thiết kế ban đầu, có thể học thêm `spark-shell`.
-
-### **5.4. Chạy trên cloud**
-
-1. **Databricks Community Edition**
-
-	- Nếu không muốn tự cài local hoặc muốn có trải nghiệm notebook thuận tiện hơn, bạn có thể dùng Databricks Community Edition qua trình duyệt web.
-	- Đây là môi trường cloud miễn phí do Databricks cung cấp để học Spark, cho phép chạy Scala, Python, SQL hoặc R trực tiếp trên giao diện web.
-
-2. **Lợi ích của cloud notebook**
-
-	- Cách học này giúp bạn bỏ qua phần cài đặt phức tạp, tập trung ngay vào việc đọc code, chỉnh sửa code và quan sát kết quả.
-	- Nó đặc biệt hữu ích nếu mục tiêu của bạn là học khái niệm và thực hành nhanh thay vì tự dựng môi trường từ đầu.
-
-## **6. Application**
-
-- Với data engineer, Chapter 1 giúp định vị Spark trong modern data stack: Spark là lớp compute nằm trên storage và nối nhiều loại workload.
-- Với analyst hoặc data scientist, chương này giúp hiểu vì sao Spark phù hợp cho các bài toán dữ liệu lớn hơn khả năng của một máy và vẫn giữ tư duy làm việc gần với bảng dữ liệu và query.
-- Với người mới học, ứng dụng thực tế lớn nhất của Chapter 1 là xây đúng mental model trước khi sang Chapter 2 và các chapter về Structured APIs.
+1. Local setup
+    - Để chạy Spark local, bạn cần Java; nếu dùng Python API thì cần thêm Python interpreter.
+    - Có thể tải Spark bản pre-built và giải nén để bắt đầu.
+    - Đây là lối vào đơn giản vì bạn có thể chạy ví dụ ngay, không cần dựng cả cluster.
+2. Interactive consoles
+    - `pyspark` là shell tương tác cho Python.
+    - `spark-shell` là shell tương tác cho Scala.
+    - `spark-sql` là shell cho truy vấn SQL.
+    - Các shell này cực kỳ quan trọng cho người mới vì chúng rút ngắn vòng lặp học tập: thử lệnh, xem kết quả, sửa lại, hiểu dần mô hình.
+3. Cloud option
+    - Databricks Community Edition là một môi trường cloud miễn phí để học Spark.
+    - Lợi thế của mô hình này là có sẵn môi trường notebook, dữ liệu và code ví dụ, nên giảm đáng kể chi phí setup ban đầu.
