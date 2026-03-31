@@ -1,7 +1,5 @@
 ## **Chapter 1: What Is Apache Spark?**
 
-## **1. Tóm tắt**
-
 ```mermaid
 mindmap
   root((Chapter 1<br/>What Is Apache Spark?))
@@ -17,6 +15,8 @@ mindmap
       Hiểu vì sao có Spark
       Chưa cần ưu tiên syntax
 ```
+
+## **1. Tóm tắt**
 
 - Điều quan trọng nhất của Chapter 1 **không phải syntax**, mà là hiểu đúng “vì sao Spark tồn tại” và “nó giải quyết lớp bài toán nào”.
 - Spark khác mô hình Hadoop đời đầu ở chỗ nó **tập trung vào computation** trên nhiều storage system khác nhau thay vì gắn chặt compute với một storage duy nhất.
