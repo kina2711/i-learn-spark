@@ -21,7 +21,7 @@ mindmap
       (Đàn hồi vô hạn: Siêu Sale thì thuê 1000 máy, hết Sale trả lại)
     (Decoupling - Sự chia ly)
       (Cất dữ liệu vào Kho riêng: S3 / GCS)
-      (Thuê Máy Tính (Compute) riêng chỉ để mượn CPU/RAM)
+      ["Thuê Máy Tính (Compute) riêng chỉ để mượn CPU/RAM"]
 ```
 
 ## 3. Content
