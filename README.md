@@ -23,20 +23,20 @@ flowchart TD
     classDef labs fill:#fce4ec,stroke:#c2185b,stroke-width:2px,color:#000
 
     %% Cấu trúc
-    subgraph P1[Phase 1: Xây Dựng Nền Tảng Vật Lý & Tư Duy]
+    subgraph P1["Phase 1: Xây Dựng Nền Tảng Vật Lý & Tư Duy"]
         C1(Chương 1: Bức Tường Phần Cứng) --> C2(Chương 2: Lõi Kiến Trúc Phân Tán)
         C2 --> C3(Chương 3: RDD & DAG)
         C3 --> C4(Chương 4: DataFrame, Catalyst & Tungsten)
     end
     class P1 phase1
 
-    subgraph P2[Phase 2: Lõi Cơ Chế Hoạt Động (Giải Phẫu Spark)]
+    subgraph P2["Phase 2: Lõi Cơ Chế Hoạt Động (Giải Phẫu Spark)"]
         C5(Chương 5: Quản lý Bộ nhớ & OOM) --> C6(Chương 6: Mạng Lưới & Cơn Ác Mộng Shuffle)
         C6 --> C7(Chương 7: Ổ Cứng & Tối Ưu Định Dạng Parquet)
     end
     class P2 phase2
 
-    subgraph P3[Phase 3: Tối Ưu & Vận Hành Thực Chiến (Cloud Native)]
+    subgraph P3["Phase 3: Tối Ưu & Vận Hành Thực Chiến (Cloud Native)"]
         C8(Chương 8: AQE & Chiến Thuật Joins) --> C9(Chương 9: Giám Sát Hệ Thống - Observability)
         C9 --> C10(Chương 10: Vận Hành Production - YARN vs K8s)
         C10 --> C11(Chương 11: Structured Streaming & Watermark)
@@ -46,7 +46,7 @@ flowchart TD
     end
     class P3 phase3
 
-    subgraph L[Phase 4: Căn Phòng Thực Hành (Forensic Labs)]
+    subgraph L["Phase 4: Căn Phòng Thực Hành (Forensic Labs)"]
         C15(Chương 15: Giải Phẫu Code Thực Tế)
         L1[Lab 1: Khám Nghiệm OOM]
         L2[Lab 2: Chữa Bệnh Skew]
